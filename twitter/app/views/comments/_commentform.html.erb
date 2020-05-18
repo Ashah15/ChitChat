@@ -1,0 +1,5 @@
+<%= form_for [Comment.new] do |f| %> 
+                <%= f.text_area :text, class: 'tweet-composer', rows: 4, placeholder: 'Lets tweet' %>
+                <%= f.file_field :image, class: 'custom-file-input' %>
+                 <%= f.submit "Twitter", class: "tweet-btn d-block" %>
+            <% end %>

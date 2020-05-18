@@ -1,0 +1,35 @@
+<!-- Vertical Navigation  -->
+<div class="col nav-vertical">
+    <div class="logo-area">
+        <img src="http://clipart-library.com/images/BigAp9ri8.png" alt="logo" id="logo">
+    </div>
+    <nav class="nav-vertical-nav">
+        <ul class="nav-list">
+            <li><i class="fas fa-home"></i> <%= link_to "Home", root_path %></li>
+            <li><i class="far fa-compass"></i> <%= link_to "Connect", connect_path %></li>
+            <li> <i class="fas fa-street-view"></i> <%= link_to "Profile", current_user %></li>
+            <li><i class="fas fa-bell"></i> <%= link_to "Notifications", notifications_path %></li>
+            <li><i class="fas fa-bell"></i> <%= link_to "About", about_path %></a></li>
+            <li><i class="fas fa-hand-holding"></i> <%= link_to "Help", help_path %></li>
+            <li><i class="fas fa-atom"></i><%= link_to "Log out", logout_path, method: :delete %></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="col main-content">
+
+<!-- Horizontal Navigation -->
+<nav class="row nav-horizontal">
+        <div class="col search-bar-col">
+            <input type="text" placeholder="Search" class="search-bar">
+        </div>
+        <div class="col small-profile-col">
+            <p><span class="welcome-text">Hey, <%= current_user.first_name %> </span> 
+                <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar , class: "s-profile-pic", alt: "profile-picture" %> 
+                <% else %>
+                <%= image_tag gravatar_image_url(current_user.email, size:40), class: 's-profile-pic' %>
+                <% end %>
+        </div>
+    </nav>
+

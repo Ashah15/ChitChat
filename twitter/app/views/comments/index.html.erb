@@ -1,0 +1,36 @@
+   <%= render 'layouts/header' %>
+   
+    <div class="main-content-cover-pic"></div>
+    <div class="main-content-body row">
+        <%= render 'layouts/profile' %>
+        <div class="col" id="tweets-col">
+
+             <%= render "commentform" %>
+
+            <p class="tweets-titlebar">Twitter</p>
+
+            <%= render @comments %>
+
+
+        </div>
+        <div class="col followers-col">
+            <p>Who to follow</p>
+           <% current_user.nonfollowers.each do|user| %>
+              <% unless current_user == user %>
+               <div class="row j-between">
+                 <div class="row s-person">
+                    <p> <% if user.avatar.attached? %>
+                        <%= image_tag user.avatar , class: "s-profile-pic", alt: "profile-picture" %> 
+                        <% else %>
+                        <%= image_tag gravatar_image_url(user.email, size:40), class: 's-profile-pic' %>
+                        <% end %>       
+                        </p>
+                    <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
+                    <%= button_to "Follow",{:controller => 'followings', :action => 'create',:user_id => current_user.id, :follower_id => user.id}, {:method => :post, :class => "tweet-btn"} %>
+                    
+               </div>
+               <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

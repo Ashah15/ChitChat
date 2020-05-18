@@ -1,0 +1,13 @@
+<nav class="row nav-horizontal">
+        <div class="col search-bar-col">
+            <input type="text" placeholder="Search" class="search-bar">
+        </div>
+        <div class="col small-profile-col">
+            <p><span class="welcome-text">Hey, <%= current_user.first_name %> </span> 
+            	<% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar , class: "s-profile-pic", alt: "profile-picture" %> 
+                <% else %>
+                <%= image_tag gravatar_image_url(current_user.email, size:40), class: 's-profile-pic' %>
+                <% end %>
+        </div>
+    </nav>

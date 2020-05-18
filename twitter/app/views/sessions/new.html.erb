@@ -1,0 +1,22 @@
+
+		<div class="col form-col">
+			<p class="text-center"> <img src="http://clipart-library.com/images/BigAp9ri8.png" alt="logo" id="logo" style="margin-bottom:0;"></p>
+			<h1 class="text-center">Log in</h1>
+
+			 <%= form_for(:session, url: login_path) do |f| %>
+
+						<%= f.label :username %>
+			      <%= f.text_field :username, class: 'input-bar d-block' %>
+
+			      
+			      <%= f.label :remember_me, class: '' do %>
+			        <%= f.check_box :remember_me %>
+			        <span>Remember me on this computer</span>
+			      <% end %>
+
+			      <%= f.submit "Log in", class: "auth-btn d-block" %>
+			    <% end %>
+
+			    <p class="text-center">New user? <%= link_to "Sign up now!", signup_path , class: 'color-black' %></p>
+
+		</div>

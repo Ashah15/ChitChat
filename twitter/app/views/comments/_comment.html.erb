@@ -1,0 +1,18 @@
+ <div class="tweet row">
+                <%= image_tag comment.author.avatar , class: "s-profile-pic", alt: "big profile image" %>
+                <div class="tweet-post">
+                    <% if comment.image.attached? %>
+                    <%= image_tag comment.image, class: 'post-pic' %>
+                    <% end %>
+                    <div class="row j-between"><p class="tweet-post-name"><span class="f-name"><%= comment.author.name %></span> <i class="fas fa-check-circle"></i><span class="u-name">@<%= comment.author.username %></span></p> <p class="tweet-post-timeago"> <i class="far fa-clock"></i><%= time_ago_in_words(comment.created_at) %> ago.</p></div>
+                    <p class="tweet-comment"><%= comment.text %></p>
+                    <p class="likes-bar"><%= pluralize(comment.likes.count, "like") %></p>
+                    <% unless liked?(comment.id) %>
+										  <%= button_to "Like",{:controller => 'likes', :action => 'create',:user_id => current_user.id, :comment_id => comment.id}, {:method => :post, :class => "likebtn"} %>
+										<% else %>
+										  <%= button_to "Unlike",{:action => 'destroy',
+										  	:controller => 'likes',:id =>  current_user_liked(comment.id) }, 
+										  	{:method => :delete, :class => "likebtn"} %>
+										  <% end %>
+                </div>
+            </div>
