@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_164221) do
+ActiveRecord::Schema.define(version: 2020_05_18_162131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,28 +37,43 @@ ActiveRecord::Schema.define(version: 2020_05_19_164221) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "followings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id"], name: "index_followings_on_follower_id"
+    t.index ["user_id"], name: "index_followings_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "comment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "email"
+    t.string "location"
+    t.string "remember_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
-    t.string "name"
-    t.string "email"
-    t.string "remember_digest"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "followings", "users"
+  add_foreign_key "followings", "users", column: "follower_id"
+  add_foreign_key "likes", "comments"
+  add_foreign_key "likes", "users"
 end
