@@ -1,8 +1,8 @@
 ## Twitter
 ### Mini-Twitter-Clone
-> Features: posting, following, liking and authentication
+>This is a Twitter-clone app that allows one to post, like, unlike and comment on certain issues
 
-![tweetpage-rails](https://user-images.githubusercontent.com/17970203/80851512-2a017b80-8c1a-11ea-8ae4-3d9f2ceb3fea.png)
+![tweet](https://user-images.githubusercontent.com/25789605/82438699-238c5400-9aa2-11ea-925f-214bc0d16b49.png)
 
 ## Description:
 A mini twitter clone using Ruby on Rails.
