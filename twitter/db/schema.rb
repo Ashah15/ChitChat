@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2020_05_18_162131) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.string "location"
     t.string "remember_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
