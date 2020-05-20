@@ -1,6 +1,6 @@
 
   <div class="col form-col">
-  	<p class="text-center"> <img src="http://clipart-library.com/images/BigAp9ri8.png" alt="logo" id="logo" style="margin-bottom:0;"></p>
+  	<p class="text-center"> <img src="http://gravatar.com/avatar/3b1a49dfd7e18269912a1a4774d4cb44?size=50" alt="logo" id="logo" style="margin-bottom:0;"></p>
   	<h1 class="text-center">Sign up</h1>
     <% if flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
@@ -16,13 +16,6 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'input-bar d-block' %>
-
-      <%= f.label :location %>
-      <%= f.text_field :location, class: 'input-bar d-block' %>
-
-      <%= f.label :avatar, class: 'd-block text-center'%>
-      <%= f.file_field :avatar , class: 'custom-file-input'%>
-
 
       <%= f.submit "Sign Up", class: "auth-btn d-block" %>
     <% end %>

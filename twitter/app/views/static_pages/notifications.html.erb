@@ -6,7 +6,7 @@
         <div class="col" id="tweets-col">
              <p class="tweets-titlebar">Your Notifications</p>
                	  <% current_user.followers.each do|user| %>
-               	      <div class="row j-between"> <p class="tweet-notif"><span class="u-name">@<%= user.username %> followed you</span></p> <p class="tweet-post-timeago"> <i class="far fa-clock"></i>a while ago</p></div>
+               	      <div class="row j-between"> <p class="tweet-notif"><span class="u-name">@<%= user.username %> followed you</span></p> <p class="tweet-post-timeago"> <i class="far fa-clock"></i>few minutes ago</p></div>
                	  <% end %>
                     
         </div>
