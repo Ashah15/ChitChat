@@ -1,5 +1,5 @@
 	<%= form_with model: @user do |f| %>  
-      "<%= render 'error/error_messages', recourse: @user %>"
+      <%= render 'error/error_message', resource: @user %>
 
 	<%= f.label :name %>
 	<%= f.text_field :name, class: 'input-bar d-block' %> 
