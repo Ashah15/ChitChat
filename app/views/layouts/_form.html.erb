@@ -1,5 +1,5 @@
 	<%= form_with model: @user do |f| %>  
-      <%= render 'error/error_messages' %>
+      <%= render 'shared/error_messages' %>
 
 	<%= f.label :name %>
 	<%= f.text_field :name, class: 'input-bar d-block' %> 
