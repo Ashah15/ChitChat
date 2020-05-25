@@ -13,7 +13,7 @@ RSpec.describe 'User create comments', type: :feature do
 
   scenario 'has incorrect log_in details' do
     login_with 'rojas'
-    expect(page).to have_content('New user? Sign up now!')
+    expect(page).to have_content("Log in\nUsername Remember me on this computer\nNew to Twitter? Sign up now!")
   end
 
   def login_with(name)
