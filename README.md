@@ -20,7 +20,18 @@ A mini twitter clone using Ruby on Rails.
 ## Live Demo
 [Click Here](https://asha-tweet.herokuapp.com/signup/)
 
+## How to Run the App Locally
+```
+- git clone https://github.com/Ashah15/Tweet.git
+- cd Tweet
+- bundle install
+-rails db:create
+-rails db:migrate
+-for rspec run tests
+-for the rails server run rails s
+-on your browser open localhost:3000
 
+```
 ## Authors:
 👤 Asha
 
