@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :inverse_followings, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  has_many :following, through: :active_followings, source: followed
+
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -47,11 +49,11 @@ class User < ApplicationRecord
   end
 
   def followers
-    followings.map{|following| following.follower }
+    inverse_followings.map{|following| following.user }
   end
 
   def following
-    inverse_followings.map{|following| following.user }
+    followings.map{|following| following.follower }
   end
 
   def nonfollowers
