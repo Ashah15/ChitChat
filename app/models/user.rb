@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_many :inverse_followings, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :following, through: :active_followings, source: followed
 
   # Returns the hash digest of the given string.
   def User.digest(string)
