@@ -17,7 +17,7 @@ A mini twitter clone using Ruby on Rails.
 - HTML/CSS(Flexbox)
 
 ## Live Demo
-[Click Here](https://asha-tweet.herokuapp.com/signup/)
+[Click Here](https://asha-twitter.herokuapp.com/signup)
 
 ## How to Run the App Locally
 ```
