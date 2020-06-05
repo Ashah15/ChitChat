@@ -1,4 +1,4 @@
-<%= render 'layouts/header' %>
+  <%= render 'layouts/header' %>
     <div class="main-content-cover-pic"></div>
     <div class="main-content-body row">
         <%= render 'layouts/profile' %>
@@ -32,6 +32,16 @@
                     
                </div>
                
+            <% end %>
+
+            <% if @current_user == @user %>
+            <h5><%= "#{@current_user.username}'s page" %></h5>
+            <% elsif @current_user.followers.include?(@user) %>
+            <h5><%= button_to "UnFollow #{@user.username}",     
+                     unfollow_user_path, method: "POST" %></h5>
+            <% else %>
+            <h5><%= button_to "Follow #{@user.username}", follow_user_path, 
+                  method: "POST"  %></h5>
             <% end %>
 
         </div>

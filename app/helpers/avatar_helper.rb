@@ -7,4 +7,13 @@ module AvatarHelper
       end	
 	end
 
+	def current_user_avatar
+	  if current_user.avatar.attached? 
+        image_tag current_user.avatar , class: "m-profile-pic", alt: "profile-picture"
+      else 
+        image_tag gravatar_image_url(current_user.email, size:40), class: 'm-profile-pic'
+      end
+		
+	end
+
 end

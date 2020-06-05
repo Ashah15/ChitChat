@@ -1,11 +1,5 @@
 <div class="col tweet-stats-col">
-            <p>
-                <% if current_user.avatar.attached? %>
-                <%= image_tag current_user.avatar , class: "m-profile-pic", alt: "profile-picture" %> 
-                <% else %>
-                <%= image_tag gravatar_image_url(current_user.email, size:40), class: 'm-profile-pic' %>
-                <% end %>
-            </p>
+            <p>current_user_avatar</p>
             <p class="user-fullname"><%= current_user.name %> <i class="fas fa-check-circle"></i></p>
             <p class="user-username">@<%= current_user.username %> </p> 
             

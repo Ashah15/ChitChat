@@ -34,6 +34,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+  	@user = User.find(params[:id])
+  	@current_user.followers << @user
+  	redirect_to user_path(@user)
+  end
+
+  def unfollow
+  	@user = User.find(params[:id])
+	@current_user.followed_users.find_by(follower_id: 
+        @user.id).destroy 
+    redirect_to user_path(@user) 	
+  end
+
 	def destroy
 		@user = User.find(params[:id])
 		@user.destroy
