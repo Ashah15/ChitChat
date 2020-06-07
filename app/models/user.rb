@@ -47,6 +47,10 @@ class User < ApplicationRecord
   	self.name.split.last
   end
 
+  def fan(user)
+    self.following.include? user
+  end
+
   def followers
     inverse_followings.map{|following| following.user }
   end
