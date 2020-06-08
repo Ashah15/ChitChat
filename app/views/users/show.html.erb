@@ -10,7 +10,7 @@
 
         </div>
         <div class="col followers-col">
-            <p>Followed By</p>
+            <p>You are Following</p>
            <% @current_user.following.each do|user| %>
               
                <div class="row j-between">
@@ -22,7 +22,7 @@
                
             <% end %>
 
-             <p>You are Following</p>
+             <p>Followed By</p>
            <% @current_user.followers.each do|user| %>
               
                <div class="row j-between">
