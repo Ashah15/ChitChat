@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = current_user
-		@comments = Comment.all
+		@comments = current_user.comments
 	end
 
 	def edit 
