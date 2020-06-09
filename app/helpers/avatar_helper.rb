@@ -1,5 +1,5 @@
 module AvatarHelper
-	def user_avatar
+	def user_avatar(user)
 	  if user.avatar.attached?
         image_tag user.avatar , class: "s-profile-pic", alt: "profile-picture" 
       else
@@ -7,7 +7,7 @@ module AvatarHelper
       end	
 	end
 
-	def current_user_avatar
+	def current_user_avatar(current_user)
 	  if current_user.avatar.attached? 
         image_tag current_user.avatar , class: "m-profile-pic", alt: "profile-picture"
       else 
