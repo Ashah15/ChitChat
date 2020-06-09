@@ -13,12 +13,7 @@
               <% unless current_user == user %>
                <div class="row j-between">
                  <div class="row s-person">
-                    <p> <% if user.avatar.attached? %>
-                        <%= image_tag user.avatar , class: "s-profile-pic", alt: "profile-picture" %> 
-                        <% else %>
-                        <%= image_tag gravatar_image_url(user.email, size:40), class: 's-profile-pic' %>
-                        <% end %>
-                        </p>
+                    <p>user_avatar(user)</p>
                     <% if current_user.fan(user)%>
                         <% follow_id = current_user.followings.find_by(follower_id: user.id) %>
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
