@@ -4,7 +4,7 @@
         <%= render 'layouts/profile' %>
         <div class="col" id="tweets-col">
 
-            <p class="tweets-titlebar">Twitter</p>
+            <p class="tweets-titlebar">ChitChat</p>
 
             <%= render @comments %>
 
@@ -15,7 +15,7 @@
               
                <div class="row j-between">
                  <div class="row s-person">
-                    <p>user_avatar(user)</p>
+                    <p><%= user_avatar(user) %></p>
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
                     
                </div>
@@ -27,21 +27,11 @@
               
                <div class="row j-between">
                  <div class="row s-person">
-                    <p>user_avatar(user)</p>
+                    <p><%= user_avatar(user) %></p>
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
                     
                </div>
                
-            <% end %>
-
-            <% if @current_user == @user %>
-            <%= "#{@current_user.username}'s page" %>
-            <% elsif @current_user.followers.include?(@user) %>
-            <%= button_to "UnFollow #{@user.username}",     
-                     unfollow_user_path, method: "POST" %>
-            <% else %>
-            <%= button_to "Follow #{@user.username}", follow_user_path, 
-                  method: "POST"  %>
             <% end %>
 
         </div>
