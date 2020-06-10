@@ -7,4 +7,5 @@ module CommentsHelper
   def current_user_liked(comment_id)
     current_user.likes.find_by(comment_id: comment_id).id
   end
+
 end

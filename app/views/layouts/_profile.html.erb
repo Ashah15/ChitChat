@@ -22,6 +22,5 @@
                 <%= button_to "Delete Profile",{:action => 'destroy',
                                             :controller => 'users',:id => current_user.id }, 
                                             {:method => :delete, :class => "deletebtn"} %>
-                <%= link_to "Edit Profile", edit_user_path(current_user) ,:class => 'editbtn'%>
             </div> 
         </div>

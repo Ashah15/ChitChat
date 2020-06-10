@@ -22,6 +22,7 @@
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
                     <%= button_to "Follow",{:controller => 'followings', :action => 'create',:user_id => current_user.id, :follower_id => user.id}, {:method => :post, :class => "tweet-btn"} %>
                <% end %>
+               
                </div>
                <% end %>
             <% end %>
