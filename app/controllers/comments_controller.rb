@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = Comment.all.where(author_id: current_user.id)
+    @users = User.all
   end
 
   def destroy

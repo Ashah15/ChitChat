@@ -9,15 +9,15 @@
         </div>
         <div class="col followers-col">
           <p>Who to follow</p>
-           <% User.all.each do|user| %>
+           <% @users.each do|user| %>
               <% unless current_user == user %>
                <div class="row j-between">
                  <div class="row s-person">
                     <p><%= user_avatar(user) %></p>
                     <% if current_user.fan(user)%>
-                        <% follow_id = current_user.followings.find_by(follower_id: user.id) %>
+                        <% follow_id(user) %>
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
-                 <%= button_to "Unfollow",{:controller => 'followings', :action => 'destroy', :id => follow_id }, {:method => :delete, :class => "tweet-btn"} %>
+                 <%= button_to "Unfollow",{:controller => 'followings', :action => 'destroy', :id => @follow_id }, {:method => :delete, :class => "tweet-btn"} %>
                     <% else %>
                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
                     <%= button_to "Follow",{:controller => 'followings', :action => 'create',:user_id => current_user.id, :follower_id => user.id}, {:method => :post, :class => "tweet-btn"} %>
