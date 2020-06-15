@@ -14,14 +14,7 @@
                <div class="row j-between">
                  <div class="row s-person">
                     <p><%= user_avatar(user) %></p>
-                    <% if current_user.fan(user)%>
-                        <% follow_id(user) %>
-                    <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
-                 <%= button_to "Unfollow",{:controller => 'followings', :action => 'destroy', :id => @follow_id }, {:method => :delete, :class => "tweet-btn"} %>
-                    <% else %>
-                    <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
-                    <%= button_to "Follow",{:controller => 'followings', :action => 'create',:user_id => current_user.id, :follower_id => user.id}, {:method => :post, :class => "tweet-btn"} %>
-               <% end %>
+                    <% user_fan(user) %>
                
                </div>
                <% end %>

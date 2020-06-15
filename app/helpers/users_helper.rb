@@ -2,7 +2,7 @@ module UsersHelper
   def user_fan(user)
   	if current_user.fan(user)
   		follow_id(user)
-
+       
   	  button_to "Unfollow",{:controller => 'followings', :action => 'destroy', :id => @follow_id },
   	  {:method => :delete, :class => "tweet-btn"}
   	else
