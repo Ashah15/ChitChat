@@ -10,16 +10,16 @@
         <div class="col followers-col">
           <p>Who to follow</p>
            <% @users.each do|user| %>
-              <% unless current_user == user %>
+           <% show_users(user)%>
                <div class="row j-between">
                  <div class="row s-person">
-                    <p><%= user_avatar(user) %></p>
-                    <% user_fan(user) %>
-                     
-                     <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
-               
-               </div>
-               <% end %>
+                  <%= user_avatar(user) %>
+                  <p class="follower-name"><span class="f-name"><%= user.
+                  name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p></div>
+                  </div>
+                  <%= user_fan(user) %>
+                
+                 
             <% end %>
         </div>
     </div>
