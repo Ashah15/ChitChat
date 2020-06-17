@@ -13,8 +13,9 @@ module UsersHelper
   end
 
   def show_users(user)
+  	 
   	  unless current_user == user
-
+  	  	
   	  end
   	 
   end
