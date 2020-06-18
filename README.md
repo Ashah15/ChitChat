@@ -21,7 +21,7 @@ A mini twitter clone using Ruby on Rails.
 
 ## How to Run the App Locally
 ```
-- git clone https://github.com/Ashah15/Tweet.git
+- git clone https://github.com/Ashah15/ChitChat.git
 - cd Tweet
 - bundle install
 -rails db:create
