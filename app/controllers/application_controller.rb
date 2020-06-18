@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
 
   def logged_in_user
     return if logged_in?
-
     redirect_to login_url
-    end
+  end
   # frozen_string_literal: true
 end
