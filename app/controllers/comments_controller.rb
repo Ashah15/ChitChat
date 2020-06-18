@@ -8,8 +8,6 @@ class CommentsController < ApplicationController
     @comment.author = current_user
     if @comment.save
       redirect_to comments_path  
-    else
-      redirect_to comments_path
     end
   end
 
