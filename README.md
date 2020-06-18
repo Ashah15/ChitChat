@@ -22,7 +22,7 @@ A mini twitter clone using Ruby on Rails.
 ## How to Run the App Locally
 ```
 - git clone https://github.com/Ashah15/ChitChat.git
-- cd Tweet
+- cd ChitChat
 - bundle install
 -rails db:create
 -rails db:migrate
