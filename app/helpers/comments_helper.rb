@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CommentsHelper
   def liked?(comment_id)
     current_user.likes.exists?(comment_id: comment_id)
@@ -9,20 +11,16 @@ module CommentsHelper
   end
 
   def comment_image(image)
-    if image.attached?
-     image_tag image, class: 'post-pic'
-    end
+    image_tag image, class: 'post-pic' if image.attached?
   end
 
   def liked(is_liked, current_user_id, comment_id)
-  	unless is_liked
-      button_to "Like",{:controller => 'likes', :action => 'create',:user_id => current_user_id, :opinion_id => comment_id}, {:method => :post, :class => "likebtn"} 
-    else 
-      button_to "Unlike",{:action => 'destroy',
-                        :controller => 'likes',:id =>  current_user_liked(comment_id) }, 
-                        {:method => :delete, :class => "likebtn"} 
-    end 
-  	
+    if is_liked
+      button_to 'Unlike', { action: 'destroy',
+                            controller: 'likes', id: current_user_liked(comment_id) },
+                { method: :delete, class: 'likebtn' }
+    else
+      button_to 'Like', { controller: 'likes', action: 'create', user_id: current_user_id, opinion_id: comment_id }, { method: :post, class: 'likebtn' }
+    end
   end
-
 end

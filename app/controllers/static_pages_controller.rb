@@ -1,14 +1,11 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
-  def connect
-  end
+  def connect; end
 
-  def notifications
-  end
+  def notifications; end
 
-  def about
-  end
+  def about; end
 
-  def help
-  end
+  def help; end
 end
-
