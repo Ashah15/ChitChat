@@ -7,9 +7,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comments_params)
     @comment.author = current_user
-    if @comment.save
-      redirect_to comments_path  
-    end
+    redirect_to comments_path if @comment.save
   end
 
   def index
