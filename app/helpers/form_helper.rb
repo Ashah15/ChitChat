@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module FormHelper
   def errors_for(_form, _field)
     return unless resource.errors.any?
