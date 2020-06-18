@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :comment_owner, only: [:destroy]
   before_action :logged_in_user
-
 
   def create
     @comment = current_user.comments.build(comments_params)
@@ -33,7 +34,4 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     redirect_to comments_path unless current_user == @comment.author
   end
-
-
 end
-

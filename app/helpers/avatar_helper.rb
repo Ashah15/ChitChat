@@ -15,5 +15,5 @@ module AvatarHelper
     end
 		
 	end
-
 end
+
