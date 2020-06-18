@@ -11,15 +11,13 @@
           <p>Who to follow</p>
            <% @users.each do|user| %>
                <% show_users(user)%>
-               
                <div class="row j-between">
                  <div class="row s-person">
                   <%= user_avatar(user) %>
                   <p class="follower-name"><span class="f-name"><%= user.name %></span> <i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p>
                 </div>
                 <%= user_fan(user) %>
-                  </div>
-               
+                  </div>               
             <% end %>
         </div>
     </div>
