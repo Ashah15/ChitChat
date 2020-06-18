@@ -1,14 +1,12 @@
-
 class ApplicationController < ActionController::Base
-		include SessionsHelper
+  include SessionsHelper
 
-		private
+  private
 
-		def logged_in_user
-      		return if logged_in?
-        	redirect_to login_url
-      	
-    	end
-# frozen_string_literal: true
+  def logged_in_user
+    return if logged_in?
 
+    redirect_to login_url
+    end
+  # frozen_string_literal: true
 end

@@ -20,7 +20,7 @@ module CommentsHelper
                 { method: :delete, class: 'likebtn' }
     else
       button_to 'Like', { controller: 'likes', action: 'create', user_id: current_user_id, opinion_id: comment_id },
-            { method: :post, class: 'likebtn' }
+                { method: :post, class: 'likebtn' }
     end
   end
 end
