@@ -1,7 +1,7 @@
-## Twitter
-### Mini-Twitter-Clone
->This is a Twitter-clone app that allows one to post, like, unlike and comment on certain issues
-![tweet](https://user-images.githubusercontent.com/25789605/83570958-94fee480-a52f-11ea-8f67-47aaa6e61ba8.png)
+## ChitChat
+### ChitChat
+>This is a ChitChat app that allows one to post, like, unlike and comment on certain issues and stories written
+![chitchat](https://user-images.githubusercontent.com/25789605/85013025-99044680-b16c-11ea-8bbd-8e760b630a64.png)
 
 ## Description:
 A mini twitter clone using Ruby on Rails.
@@ -17,12 +17,12 @@ A mini twitter clone using Ruby on Rails.
 - HTML/CSS(Flexbox)
 
 ## Live Demo
-[Click Here](https://asha-twitter.herokuapp.com/signup)
+[Click Here](https://asha-chat.herokuapp.com/signup)
 
 ## How to Run the App Locally
 ```
-- git clone https://github.com/Ashah15/Tweet.git
-- cd Tweet
+- git clone https://github.com/Ashah15/ChitChat.git
+- cd ChitChat
 - bundle install
 -rails db:create
 -rails db:migrate
