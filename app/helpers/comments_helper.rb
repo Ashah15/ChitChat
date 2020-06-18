@@ -19,7 +19,8 @@ module CommentsHelper
       button_to 'Unlike', { action: 'destroy', controller: 'likes', id: current_user_liked(comment_id) },
                 { method: :delete, class: 'likebtn' }
     else
-      button_to 'Like', { controller: 'likes', action: 'create', user_id: current_user_id, opinion_id: comment_id }, { method: :post, class: 'likebtn' }
+      button_to 'Like', { controller: 'likes', action: 'create', user_id: current_user_id, opinion_id: comment_id },
+            { method: :post, class: 'likebtn' }
     end
   end
 end
