@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module UsersHelper
   def user_fan(user)
     if current_user.fan(user)
@@ -8,13 +9,13 @@ module UsersHelper
                 { method: :delete, class: 'tweet-btn' }
     else
       button_to 'Follow', { controller: 'followings', action: 'create', user_id: current_user.id, follower_id: user.id },
-       { method: :post, class: 'tweet-btn' }
+                { method: :post, class: 'tweet-btn' }
 
     end
   end
 
   def show_users(user)
     return if current_user == user
-    #unless current_user == user
+    # unless current_user == user
   end
 end
