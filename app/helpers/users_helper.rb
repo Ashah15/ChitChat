@@ -13,10 +13,11 @@ module UsersHelper
   end
 
   def show_users(user)
-  	 
-  	  unless current_user == user
-  	  	
-  	  end
+  	content_tag :div do
+     unless current_user == user
+     end
+     
+    end
   	 
   end
  
