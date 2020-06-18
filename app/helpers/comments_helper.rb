@@ -15,13 +15,11 @@ module CommentsHelper
   end
 
   def liked(is_liked, current_user_id, comment_id)
-
-  	unless is_liked
-      button_to "Like",{:controller => 'likes', :action => 'create',:user_id => current_user_id, :opinion_id => comment_id}, {:method => :post, :class => "likebtn"} 
-    else 
-      button_to "Unlike",{:action => 'destroy',:controller => 'likes',:id =>  current_user_liked(comment_id) }, 
-            {:method => :delete, :class => "likebtn"} 
-    end 
-
+    if is_liked
+      button_to 'Unlike', { action: 'destroy', controller: 'likes', id: current_user_liked(comment_id) },
+                { method: :delete, class: 'likebtn' }
+    else
+      button_to 'Like', { controller: 'likes', action: 'create', user_id: current_user_id, opinion_id: comment_id }, { method: :post, class: 'likebtn' }
+    end
   end
 end
