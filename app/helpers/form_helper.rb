@@ -2,7 +2,7 @@
 
 module FormHelper
   def errors_for(_form, _field)
-    if resource.errors.any?
+    return unless resource.errors.any?
 
       I18n.t('errors.messages.not_saved',
              count: resource.errors.count,
