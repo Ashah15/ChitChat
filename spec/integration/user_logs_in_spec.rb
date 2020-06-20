@@ -21,6 +21,11 @@ RSpec.describe 'User logs in', type: :feature do
     login_with 'lorena'
 
     expect(page).to have_content('Log out')
+
+    click_on 'Log out'
+
+    expect(page).to have_content('Log in')
+
   end
 
 

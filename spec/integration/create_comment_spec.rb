@@ -8,12 +8,12 @@ RSpec.describe 'User create comments', type: :feature do
   scenario 'has comment button' do
     login_with 'lorena'
     visit comments_path
-    expect(page).to have_content('Twitter')
+    expect(page).to have_content('ChitChat')
   end
 
   scenario 'has incorrect log_in details' do
     login_with 'rojas'
-    expect(page).to have_content("Log in\nUsername Remember me on this computer\nNew to Twitter? Sign up now!")
+    expect(page).to have_content("Log in\nUsername Remember me on this computer\nNew to ChitChat? Sign up now!")
   end
 
   def login_with(name)

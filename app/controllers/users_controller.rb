@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @comments = current_user.comments
+    @following = current_user.following
+    @followers = current_user.followers
   end
 
   def edit

@@ -11,7 +11,7 @@
         </div>
         <div class="col followers-col">
             <p>You are Following</p>
-           <% @current_user.following.each do|user| %>
+           <% @following.each do|user| %>
               
                <div class="row j-between">
                  <div class="row s-person">
@@ -23,7 +23,7 @@
             <% end %>
 
              <p>Followed By</p>
-           <% @current_user.followers.each do|user| %>
+           <% @followers.each do|user| %>
               
                <div class="row j-between">
                  <div class="row s-person">
