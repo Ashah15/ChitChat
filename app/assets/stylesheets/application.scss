@@ -7,8 +7,8 @@ body {
 }
 
 a {
-	  color: #fff;
-	  text-decoration: none;
+	color: #fff;
+	text-decoration: none;
 }
 
 .row {
@@ -43,7 +43,8 @@ a {
   line-height: 4em;
 }
 
-.fas, .far {
+.fas, 
+.far {
   padding-right: 1rem;
   color: #6d7278;
   font-size: 1.1rem;
@@ -86,7 +87,7 @@ a {
 }
 
 .input-bar {
-	  padding: 0.8rem;
+	padding: 0.8rem;
   font-size: 1rem;
   width: 100%;
   border: none;
@@ -162,7 +163,9 @@ a {
   justify-content: space-between;
 }
 
-.user-location, .user-fullname, .tweet-stat-number {
+.user-location,
+.user-fullname, 
+.tweet-stat-number {
   font-size: 1.1rem;
   color: #fff;
 }
@@ -205,9 +208,9 @@ a {
 
 .post-pic {
   width: 100%;
-     max-height: 300px;
-     object-fit: cover;
-     object-position: top;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .tweets-titlebar {
@@ -324,13 +327,13 @@ a {
 }
 
 .form-col {
-	    max-width: 400px;
-      margin: 20vh auto;
-      width: 100%;
-      background: #d6f5e2;
-      color: #000;
-      padding: 1.5rem;
-      border-radius: 6px;
+	max-width: 400px;
+  margin: 20vh auto;
+  width: 100%;
+  background: #d6f5e2;
+  color: #000;
+  padding: 1.5rem;
+  border-radius: 6px;
 }
 
 .d-block {
@@ -344,40 +347,38 @@ a {
 }
 
 .color-black {
-	color:#000;
+	color: #000;
 }
 
 .auth-btn {
-    color: #fff;
-    background: #00bf00;
-    border: none;
-    padding: 0.75rem 2.5rem;
-    margin: 1rem auto;
-    border-radius: 30px;
-    font-size: 18px;
-
+  color: #fff;
+  background: #00bf00;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  margin: 1rem auto;
+  border-radius: 30px;
+  font-size: 18px;
 }
 
 .likebtn {
-    background: transparent;
-    color: #00bf00;
-    border: 1px solid;
-    padding: 0.2rem 0.6rem;
+  background: transparent;
+  color: #00bf00;
+  border: 1px solid;
+  padding: 0.2rem 0.6rem;
 }
 
-.editbtn{
-    background: transparent;
-    color: #fffb73;
-    border: 1px solid;
-    padding: .2rem .6rem;
+.editbtn {
+  background: transparent;
+  color: #fffb73;
+  border: 1px solid;
+  padding: .2rem .6rem;
 }
-
 
 .deletebtn {
-    background: transparent;
-    color: #ff7373;
-    border: 1px solid;
-    padding: 0.2rem 0.6rem;
+  background: transparent;
+  color: #ff7373;
+  border: 1px solid;
+  padding: 0.2rem 0.6rem;
 }
 
 .likes-bar {
@@ -387,6 +388,7 @@ a {
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
+
 .custom-file-input::before {
   content: 'Upload';
   display: inline-block;
