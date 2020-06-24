@@ -1,5 +1,4 @@
 RSpec.describe User, type: :model do
-
   context 'validation test' do
     it 'ensures username presence' do
       user = User.new(name: 'last', email: 'sample@example.com').save
@@ -10,8 +9,5 @@ RSpec.describe User, type: :model do
       user = User.new(name: 'last', email: 'sample').save
       expect(user).to eq(false)
     end
-
-   end
-
-
- end
+  end
+end

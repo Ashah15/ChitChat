@@ -13,8 +13,6 @@ RSpec.describe 'Visitor signs up', type: :feature do
     expect(page).to have_content('Log in!')
   end
 
-
-
   scenario 'with blank username' do
     sign_up_with 'valid@example.com', 'lorena', ''
     expect(page).to have_content('Log in!')

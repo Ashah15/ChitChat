@@ -25,9 +25,7 @@ RSpec.describe 'User logs in', type: :feature do
     click_on 'Log out'
 
     expect(page).to have_content('Log in')
-
   end
-
 
   def login_with(name)
     visit login_path

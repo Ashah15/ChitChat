@@ -22,12 +22,11 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
 
-    #if ActiveModel::SecurePassword.min_cost cost = BCrypt::Engine::MIN_COST 
+    # if ActiveModel::SecurePassword.min_cost cost = BCrypt::Engine::MIN_COST
 
-    #else 
-      #cost =  BCrypt::Engine.cost
-    #end
-    
+    # else
+    # cost =  BCrypt::Engine.cost
+    # end
   end
 
   # Returns a random token.
