@@ -1,8 +1,7 @@
 # frozen_string_literal: true
-
 class CommentsController < ApplicationController
   before_action :comment_owner, only: [:destroy]
-  before_action :logged_in_user
+  #before_action :logged_in_user
 
   def create
     @comment = current_user.comments.build(comments_params)
@@ -12,7 +11,7 @@ class CommentsController < ApplicationController
 
   def index
     @comment = Comment.new
-    @comments = Comment.all.where(author_id: current_user.id)
+    #@comments = Comment.all.where(author_id: current_user.id)
     @users = User.all
   end
 
