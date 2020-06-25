@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CommentsHelper
   def liked?(comment_id)
     current_user.likes.exists?(comment_id: comment_id)

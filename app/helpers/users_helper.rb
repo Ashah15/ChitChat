@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module UsersHelper
   def user_fan(user)
     if current_user.fan(user)

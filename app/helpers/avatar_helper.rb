@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module AvatarHelper
   def user_avatar(user)
     if user.avatar.attached?

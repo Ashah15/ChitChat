@@ -8,5 +8,4 @@ class ApplicationController < ActionController::Base
 
     redirect_to login_url
   end
-  # frozen_string_literal: true
 end

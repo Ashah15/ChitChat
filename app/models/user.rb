@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
   attr_accessor :remember_token
   before_save { self.email = email.downcase, self.username = username.downcase }
@@ -17,16 +15,16 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   # Returns the hash digest of the given string.
-  def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
+  def self.digest(_string)
+    # cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+    # BCrypt::Engine.cost
+    # BCrypt::Password.create(string, cost: cost)
 
-    # if ActiveModel::SecurePassword.min_cost cost = BCrypt::Engine::MIN_COST
-
-    # else
-    # cost =  BCrypt::Engine.cost
-    # end
+    if ActiveModel::SecurePassword.min_cost
+      BCrypt::Engine::MIN_COST
+    else
+      BCrypt::Engine.cost
+    end
   end
 
   # Returns a random token.

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FormHelper
   def errors_for(_form, _field)
     return unless resource.errors.any?
@@ -9,7 +7,6 @@ module FormHelper
            resource: resource.class.model_name.human.downcase)
 
     resource.errors.full_messages.each do |message|
-      message
     end
   end
 end

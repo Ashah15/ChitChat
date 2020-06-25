@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LikesController < ApplicationController
   def create
     @like = Like.new(likes_params)
