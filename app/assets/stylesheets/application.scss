@@ -164,7 +164,7 @@ a {
 }
 
 .user-location,
-.user-fullname, 
+.user-fullname,
 .tweet-stat-number {
   font-size: 1.1rem;
   color: #fff;
@@ -230,7 +230,7 @@ a {
   border: 1px solid #00bf00;
   color: #ddd;
   border-radius: 20px;
-  padding: .6rem 1.5rem;
+  padding: 0.6rem 1.5rem;
   margin-bottom: 2rem;
   max-width: 200px;
 }
@@ -256,7 +256,7 @@ a {
     max-width: 95%;
   }
 
-  .tweet-post .row, 
+  .tweet-post .row,
   .followers-col .j-between {
     flex-direction: column;
   }
@@ -301,7 +301,7 @@ a {
     }
   }
 
-  .far, 
+  .far,
   .fas {
     color: green;
   }
@@ -327,7 +327,7 @@ a {
 }
 
 .form-col {
-	max-width: 400px;
+  max-width: 400px;
   margin: 20vh auto;
   width: 100%;
   background: #d6f5e2;
@@ -337,17 +337,17 @@ a {
 }
 
 .d-block {
-	display: block;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .text-center {
-	text-align: center;
+  text-align: center;
 }
 
 .color-black {
-	color: #000;
+  color: #000;
 }
 
 .auth-btn {
@@ -371,7 +371,7 @@ a {
   background: transparent;
   color: #fffb73;
   border: 1px solid;
-  padding: .2rem .6rem;
+  padding: 0.2rem 0.6rem;
 }
 
 .deletebtn {
