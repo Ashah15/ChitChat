@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = Comment.all.where(author_id: current_user.id)
+    #Comment.where("attribute = ? OR attribute2 = ?", author_id:, current_user.id)
     @users = User.all
   end
 

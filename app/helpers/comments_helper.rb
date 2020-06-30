@@ -21,4 +21,22 @@ module CommentsHelper
                 { method: :post, class: 'likebtn' }
     end
   end
+
+  def method_name
+    content_tag(:p, "Hello world!")
+  end
+
+  def show_comments(user)
+    return if user == current_user
+     content = user_avatar(user)
+     content << content_tag(:p, content_tag(:span, user.name, class: "f-name").concat(content_tag(:i, "", class: "fas fa-check-circle")).concat(content_tag(:span, "@#{user.username}", class: "u-name")), class: "follower-name" )
+     content << show_users(user)
+     content 
+    #{}"#{show_users(user)} #{user_avatar(user)} #{user_fan(user)}"
+      #show_users(user)
+      #user_avatar(user)
+      #user_fan(user)
+      #<p class="follower-name"><span class="f-name"><%= user.name %></span> 
+      #<i class="fas fa-check-circle"></i><br><span class="u-name">@<%= user.username %></span></p>
+  end
 end

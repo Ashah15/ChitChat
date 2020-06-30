@@ -15,5 +15,7 @@ module UsersHelper
   def show_users(user)
     return if current_user == user
     # unless current_user == user
+    user_fan(user)
   end
+
 end
