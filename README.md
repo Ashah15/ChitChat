@@ -26,9 +26,14 @@ A mini twitter clone using Ruby on Rails.
 - bundle install
 -rails db:create
 -rails db:migrate
--for rspec run tests
 -for the rails server run rails s
 -on your browser open localhost:3000
+
+```
+## Automated Tests
+```
+This is for running the rspec tests on the app
+-for rspec run tests
 
 ```
 ## Authors:
