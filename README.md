@@ -1,7 +1,7 @@
 ## ChitChat
 ### ChitChat
 >This is a ChitChat app that allows one to post, like, unlike and comment on certain issues and stories written
-![chitchat](https://user-images.githubusercontent.com/25789605/85013025-99044680-b16c-11ea-8bbd-8e760b630a64.png)
+![screenshot](https://user-images.githubusercontent.com/25789605/86409463-9d2e7900-bcc1-11ea-8a1f-539d5c011954.png)
 
 ## Description:
 A mini twitter clone using Ruby on Rails.
