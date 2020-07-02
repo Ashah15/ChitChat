@@ -9,10 +9,6 @@ class CommentsController < ApplicationController
   end
 
   def index
-    # @comment = Comment.new
-    # @comments = Comment.all.where(author_id: current_user.id)
-    # Comment.where("attribute = ? OR attribute2 = ?", author_id:, current_user.id)
-    # @users = User.all
     @comment = Comment.new
     following_ids = current_user.following.map(&:id)
     following_ids.push current_user.id
