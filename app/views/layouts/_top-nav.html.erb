@@ -1,0 +1,9 @@
+<nav class="row nav-horizontal">
+    <div class="col search-bar-col">
+        <input type="text" placeholder="Search" class="search-bar">
+    </div>
+    <div class="col small-profile-col">
+        <p><span class="welcome-text">Hey, <%= current_user.first_name %> </span> 
+            <%= current_user_avatar(current_user) %> </p>
+    </div>
+</nav>

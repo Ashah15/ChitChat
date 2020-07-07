@@ -1,0 +1,1456 @@
+  [1m[35m (161.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "whistle_test"[0m
+  [1m[35m (1345.2ms)[0m  [1m[35mCREATE DATABASE "whistle_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (1.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments" CASCADE[0m
+  [1m[35m (57.8ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (13.5ms)[0m  [1m[35mCREATE  INDEX  "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments"  ("blob_id")[0m
+  [1m[35m (14.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_attachments_uniqueness" ON "active_storage_attachments"  ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs" CASCADE[0m
+  [1m[35m (34.5ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (15.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_blobs_on_key" ON "active_storage_blobs"  ("key")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "followings" CASCADE[0m
+  [1m[35m (20.7ms)[0m  [1m[35mCREATE TABLE "followings" ("id" bigserial primary key, "user_id" bigint, "follower_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (10.9ms)[0m  [1m[35mCREATE  INDEX  "index_followings_on_follower_id" ON "followings"  ("follower_id")[0m
+  [1m[35m (11.1ms)[0m  [1m[35mCREATE  INDEX  "index_followings_on_user_id" ON "followings"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes" CASCADE[0m
+  [1m[35m (16.1ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "user_id" bigint NOT NULL, "opinion_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (12.2ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_opinion_id" ON "likes"  ("opinion_id")[0m
+  [1m[35m (12.9ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "opinions" CASCADE[0m
+  [1m[35m (30.2ms)[0m  [1m[35mCREATE TABLE "opinions" ("id" bigserial primary key, "text" character varying, "author_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (33.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "username" character varying, "email" character varying, "location" character varying, "remember_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (13.5ms)[0m  [1m[35mALTER TABLE "active_storage_attachments" ADD CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+[0m
+  [1m[35m (8.5ms)[0m  [1m[35mALTER TABLE "followings" ADD CONSTRAINT "fk_rails_40463234d9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (6.8ms)[0m  [1m[35mALTER TABLE "followings" ADD CONSTRAINT "fk_rails_1668ccdb36"
+FOREIGN KEY ("follower_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (9.2ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_5e505bcb24"
+FOREIGN KEY ("opinion_id")
+  REFERENCES "opinions" ("id")
+[0m
+  [1m[35m (6.6ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (23.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (5.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200501190150)[0m
+  [1m[35m (3.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200427164404),
+(20200427200243),
+(20200427212637),
+(20200501160347);
+
+[0m
+  [1m[35m (24.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-05-01 21:09:01.465870"], ["updated_at", "2020-05-01 21:09:01.465870"]]
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "9e922dbe5e2a326d0100f33c59c886c0b4451949"], ["created_at", "2020-05-01 21:09:01.486401"], ["updated_at", "2020-05-01 21:09:01.486401"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:20:50 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 49.5ms | Allocations: 3244)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/marvellous/Desktop/whistleapp/whistle/public/packs-test
+[Webpacker] Hash: 84929a3b39f03ccfd86d
+Version: webpack 4.43.0
+Time: 5847ms
+Built at: 01/05/2020 22:21:07
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-beb94e39e00d815806de.js    124 KiB  application  [emitted] [immutable]  application
+js/application-beb94e39e00d815806de.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-beb94e39e00d815806de.js js/application-beb94e39e00d815806de.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 749 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+  Rendered layouts/_head.html.erb (Duration: 16839.7ms | Allocations: 23697)
+Completed 200 OK in 17078ms (Views: 16914.5ms | ActiveRecord: 15.7ms | Allocations: 38602)
+  [1m[35m (1.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:21:07 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 8.6ms | Allocations: 1033)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 21.5ms | Allocations: 1729)
+Completed 200 OK in 42ms (Views: 39.6ms | ActiveRecord: 0.0ms | Allocations: 3159)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:21:08 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 13.9ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 27.4ms | Allocations: 1728)
+Completed 200 OK in 56ms (Views: 54.3ms | ActiveRecord: 0.0ms | Allocations: 3149)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:22:31 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 29.8ms | Allocations: 3243)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 244.1ms | Allocations: 16743)
+Completed 200 OK in 449ms (Views: 290.0ms | ActiveRecord: 17.8ms | Allocations: 31645)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (3.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:22:32.075742"], ["updated_at", "2020-05-01 21:22:32.075742"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 42ms (ActiveRecord: 26.9ms | Allocations: 1932)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.0ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 2.6ms | Allocations: 432)
+  [1m[36mActiveStorage::Attachment Load (3.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 24.8ms | Allocations: 2277)
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 1]]
+  [1m[36mFollowing Load (0.7ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 1]]
+  Rendered layouts/_profile.html.erb (Duration: 9.4ms | Allocations: 1147)
+  Rendered opinions/_opinionform.html.erb (Duration: 7.7ms | Allocations: 818)
+  [1m[36mOpinion Load (3.5ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 59.3ms | Allocations: 6157)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 8.6ms | Allocations: 1743)
+Completed 200 OK in 134ms (Views: 57.2ms | ActiveRecord: 26.1ms | Allocations: 17238)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 7.7ms | Allocations: 1057)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.4ms | Allocations: 1766)
+Completed 200 OK in 24ms (Views: 20.6ms | ActiveRecord: 0.0ms | Allocations: 3241)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 24.6ms | Allocations: 1058)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.0ms | Allocations: 1734)
+Completed 200 OK in 56ms (Views: 37.4ms | ActiveRecord: 2.6ms | Allocations: 4347)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 8.1ms | Allocations: 1742)
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.0ms | Allocations: 3163)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:22:32 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 6.9ms | Allocations: 1733)
+Completed 200 OK in 25ms (Views: 14.8ms | ActiveRecord: 2.3ms | Allocations: 4288)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:24:09 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 28.7ms | Allocations: 3243)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 304.3ms | Allocations: 17128)
+Completed 200 OK in 533ms (Views: 350.9ms | ActiveRecord: 20.7ms | Allocations: 32030)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:24:09 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (4.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (19.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (3.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:24:10.020257"], ["updated_at", "2020-05-01 21:24:10.020257"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 65ms (ActiveRecord: 37.4ms | Allocations: 1932)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:24:10 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.6ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 2]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 3.9ms | Allocations: 431)
+  [1m[36mActiveStorage::Attachment Load (1.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 23.9ms | Allocations: 2276)
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[36mFollowing Load (1.1ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 2]]
+  Rendered layouts/_profile.html.erb (Duration: 13.6ms | Allocations: 1147)
+  Rendered opinions/_opinionform.html.erb (Duration: 7.2ms | Allocations: 818)
+  [1m[36mOpinion Load (4.8ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 66.9ms | Allocations: 6155)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 23.6ms | Allocations: 1743)
+Completed 200 OK in 199ms (Views: 78.9ms | ActiveRecord: 40.7ms | Allocations: 17235)
+  [1m[35m (1.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:24:10 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 22.6ms | Allocations: 1034)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 24.0ms | Allocations: 1743)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 0.0ms | Allocations: 3174)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:24:10 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 34.7ms | Allocations: 1055)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 21.9ms | Allocations: 1733)
+Completed 200 OK in 87ms (Views: 62.7ms | ActiveRecord: 5.1ms | Allocations: 4320)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:24:10 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 8.5ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 16.8ms | Allocations: 1765)
+Completed 200 OK in 33ms (Views: 28.8ms | ActiveRecord: 0.0ms | Allocations: 3232)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:24:10 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 6.3ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.8ms | Allocations: 1733)
+Completed 200 OK in 46ms (Views: 21.7ms | ActiveRecord: 5.8ms | Allocations: 4308)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:29:59.183744"], ["updated_at", "2020-05-01 21:29:59.183744"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 23.1ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 174.6ms | Allocations: 17223)
+Completed 200 OK in 230ms (Views: 213.5ms | ActiveRecord: 0.0ms | Allocations: 21761)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 378)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 8.4ms | Allocations: 1734)
+Completed 200 OK in 22ms (Views: 11.6ms | ActiveRecord: 6.3ms | Allocations: 2765)
+  [1m[35m (1.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (4.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:29:59.598735"], ["updated_at", "2020-05-01 21:29:59.598735"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.6ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.8ms | Allocations: 1742)
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.6ms | Allocations: 1733)
+Completed 200 OK in 25ms (Views: 18.9ms | ActiveRecord: 0.7ms | Allocations: 2587)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:29:59.712602"], ["updated_at", "2020-05-01 21:29:59.712602"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 8.3ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 40.5ms | Allocations: 1742)
+Completed 200 OK in 58ms (Views: 52.3ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 14ms (ActiveRecord: 1.1ms | Allocations: 650)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:29:59 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.2ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 5]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 6.7ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 5], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 37.2ms | Allocations: 2279)
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 5]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 5]]
+  Rendered layouts/_profile.html.erb (Duration: 20.7ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 10.5ms | Allocations: 883)
+  [1m[36mOpinion Load (1.5ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 100.2ms | Allocations: 6275)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.2ms | Allocations: 1742)
+Completed 200 OK in 310ms (Views: 119.8ms | ActiveRecord: 36.8ms | Allocations: 17291)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:30:00 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 10.9ms | Allocations: 1589)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 32.8ms | Allocations: 1743)
+Completed 200 OK in 52ms (Views: 49.2ms | ActiveRecord: 0.0ms | Allocations: 4376)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:30:00 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.3ms | Allocations: 1743)
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 0.0ms | Allocations: 3165)
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:30:00 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 10.6ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.6ms | Allocations: 1742)
+Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 0.0ms | Allocations: 3163)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (6.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (5.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (3.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:31:44.433817"], ["updated_at", "2020-05-01 21:31:44.433817"]]
+  [1m[35m (2.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:31:44 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 39.3ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 383.6ms | Allocations: 17303)
+Completed 200 OK in 476ms (Views: 450.4ms | ActiveRecord: 0.0ms | Allocations: 21841)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 378)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 15.1ms | Allocations: 1734)
+Completed 200 OK in 29ms (Views: 22.4ms | ActiveRecord: 1.2ms | Allocations: 2765)
+  [1m[35m (1.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:31:45.158971"], ["updated_at", "2020-05-01 21:31:45.158971"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 5.0ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.1ms | Allocations: 1742)
+Completed 200 OK in 23ms (Views: 20.4ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.8ms | Allocations: 1733)
+Completed 200 OK in 19ms (Views: 14.9ms | ActiveRecord: 1.1ms | Allocations: 2587)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:31:45.295350"], ["updated_at", "2020-05-01 21:31:45.295350"]]
+  [1m[35m (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 6.6ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 37.2ms | Allocations: 1742)
+Completed 200 OK in 49ms (Views: 46.4ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 20ms (ActiveRecord: 2.8ms | Allocations: 650)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mFollowing Load (2.4ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 8]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 9.6ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (2.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 8], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 45.4ms | Allocations: 2279)
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 8]]
+  [1m[36mFollowing Load (1.1ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 8]]
+  Rendered layouts/_profile.html.erb (Duration: 25.7ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 15.4ms | Allocations: 883)
+  [1m[36mOpinion Load (2.2ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 136.4ms | Allocations: 6275)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 24.2ms | Allocations: 1742)
+Completed 200 OK in 355ms (Views: 159.6ms | ActiveRecord: 38.5ms | Allocations: 17291)
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:31:45 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 21.4ms | Allocations: 1589)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 41.6ms | Allocations: 1743)
+Completed 200 OK in 80ms (Views: 72.6ms | ActiveRecord: 0.0ms | Allocations: 4374)
+  [1m[35m (1.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.0ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:31:46 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 13.7ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 35.9ms | Allocations: 1742)
+Completed 200 OK in 57ms (Views: 53.4ms | ActiveRecord: 0.0ms | Allocations: 3164)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:31:46 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 12.8ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 21.2ms | Allocations: 1742)
+Completed 200 OK in 41ms (Views: 37.8ms | ActiveRecord: 0.0ms | Allocations: 3163)
+  [1m[35m (58.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:33:08.201095"], ["updated_at", "2020-05-01 21:33:08.201095"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:33:08 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 26.4ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 330.3ms | Allocations: 17373)
+Completed 200 OK in 403ms (Views: 372.0ms | ActiveRecord: 0.0ms | Allocations: 21911)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:33:08 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 378)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.5ms | Allocations: 1734)
+Completed 200 OK in 20ms (Views: 14.2ms | ActiveRecord: 1.1ms | Allocations: 2765)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:33:08.795845"], ["updated_at", "2020-05-01 21:33:08.795845"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:33:08 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.5ms | Allocations: 1742)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:33:08 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 18.1ms | Allocations: 1733)
+Completed 200 OK in 32ms (Views: 26.3ms | ActiveRecord: 1.1ms | Allocations: 2587)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:33:08.926796"], ["updated_at", "2020-05-01 21:33:08.926796"]]
+  [1m[35m (1.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:33:08 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 23.0ms | Allocations: 1742)
+Completed 200 OK in 35ms (Views: 33.1ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 14ms (ActiveRecord: 1.1ms | Allocations: 650)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.5ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 11]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 5.4ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (1.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 31.5ms | Allocations: 2279)
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 11]]
+  [1m[36mFollowing Load (1.0ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 11]]
+  Rendered layouts/_profile.html.erb (Duration: 23.0ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 21.0ms | Allocations: 883)
+  [1m[36mOpinion Load (2.2ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 108.6ms | Allocations: 6275)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 18.0ms | Allocations: 1742)
+Completed 200 OK in 275ms (Views: 124.9ms | ActiveRecord: 33.7ms | Allocations: 17290)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 17.1ms | Allocations: 1589)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 15.8ms | Allocations: 1743)
+Completed 200 OK in 42ms (Views: 38.3ms | ActiveRecord: 0.0ms | Allocations: 4374)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:33:09.510320"], ["updated_at", "2020-05-01 21:33:09.510320"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 17ms (ActiveRecord: 3.7ms | Allocations: 1200)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.4ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 12]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 2.5ms | Allocations: 201)
+  [1m[36mActiveStorage::Attachment Load (1.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 12], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 7.4ms | Allocations: 468)
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 12]]
+  [1m[36mFollowing Load (1.3ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 12]]
+  Rendered layouts/_profile.html.erb (Duration: 11.7ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 5.2ms | Allocations: 321)
+  [1m[36mOpinion Load (1.4ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 37.6ms | Allocations: 2085)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 17.1ms | Allocations: 1742)
+Completed 200 OK in 73ms (Views: 52.3ms | ActiveRecord: 9.6ms | Allocations: 4773)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 12.7ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 18.8ms | Allocations: 1742)
+Completed 200 OK in 36ms (Views: 34.4ms | ActiveRecord: 0.0ms | Allocations: 3164)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 6.7ms | Allocations: 1055)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.1ms | Allocations: 1733)
+Completed 200 OK in 37ms (Views: 21.2ms | ActiveRecord: 3.3ms | Allocations: 4319)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 6.0ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.7ms | Allocations: 1743)
+Completed 200 OK in 24ms (Views: 21.3ms | ActiveRecord: 0.0ms | Allocations: 3164)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:33:09 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (1.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (3.8ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 11.6ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.7ms | Allocations: 1733)
+Completed 200 OK in 48ms (Views: 25.4ms | ActiveRecord: 8.5ms | Allocations: 4288)
+  [1m[35m (1.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:22.370682"], ["updated_at", "2020-05-01 21:36:22.370682"]]
+  [1m[35m (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:36:22 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 29.1ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 349.1ms | Allocations: 17458)
+Completed 200 OK in 419ms (Views: 397.2ms | ActiveRecord: 0.0ms | Allocations: 21996)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:36:22 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 29ms (ActiveRecord: 16.1ms | Allocations: 820)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:36:22 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.6ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 13]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 3.5ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 13], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 22.6ms | Allocations: 2278)
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 13]]
+  [1m[36mFollowing Load (1.2ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 13]]
+  Rendered layouts/_profile.html.erb (Duration: 12.9ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 6.6ms | Allocations: 882)
+  [1m[36mOpinion Load (3.7ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 63.3ms | Allocations: 6273)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.2ms | Allocations: 1743)
+Completed 200 OK in 180ms (Views: 66.2ms | ActiveRecord: 42.7ms | Allocations: 17288)
+Started POST "/opinions" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by OpinionsController#create as HTML
+  Parameters: {"opinion"=>{"text"=>"Good Day"}, "commit"=>"Whistle"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOpinion Create (1.8ms)[0m  [1m[32mINSERT INTO "opinions" ("text", "author_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["text", "Good Day"], ["author_id", 13], ["created_at", "2020-05-01 21:36:23.245630"], ["updated_at", "2020-05-01 21:36:23.245630"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 42ms (ActiveRecord: 4.4ms | Allocations: 1582)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 13]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 5.2ms | Allocations: 196)
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 13], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 8.8ms | Allocations: 468)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 13]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 13]]
+  Rendered layouts/_profile.html.erb (Duration: 10.8ms | Allocations: 636)
+  Rendered opinions/_opinionform.html.erb (Duration: 5.6ms | Allocations: 317)
+  [1m[36mOpinion Load (1.4ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[36mCACHE ActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 13], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered collection of opinions/_opinion.html.erb [1 times] (Duration: 28.8ms | Allocations: 1918)
+  Rendered opinions/index.html.erb within layouts/application (Duration: 69.0ms | Allocations: 4085)
+Completed 500 Internal Server Error in 83ms (ActiveRecord: 5.8ms | Allocations: 4974)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (3.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:23.457192"], ["updated_at", "2020-05-01 21:36:23.457192"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 10.1ms | Allocations: 379)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 28.7ms | Allocations: 1743)
+Completed 200 OK in 45ms (Views: 42.6ms | ActiveRecord: 0.0ms | Allocations: 2494)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.2ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 21.1ms | Allocations: 1733)
+Completed 200 OK in 34ms (Views: 28.1ms | ActiveRecord: 1.6ms | Allocations: 2587)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:23.699985"], ["updated_at", "2020-05-01 21:36:23.699985"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.0ms | Allocations: 385)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 16.8ms | Allocations: 1765)
+Completed 200 OK in 24ms (Views: 22.2ms | ActiveRecord: 0.0ms | Allocations: 2523)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.5ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 20.2ms | Allocations: 1733)
+Completed 200 OK in 36ms (Views: 29.4ms | ActiveRecord: 2.0ms | Allocations: 2593)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:23.874917"], ["updated_at", "2020-05-01 21:36:23.874917"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.6ms | Allocations: 1743)
+Completed 200 OK in 20ms (Views: 18.0ms | ActiveRecord: 0.0ms | Allocations: 2486)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.6ms | Allocations: 1733)
+Completed 200 OK in 21ms (Views: 16.5ms | ActiveRecord: 1.5ms | Allocations: 2587)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:23.986852"], ["updated_at", "2020-05-01 21:36:23.986852"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:36:23 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.1ms | Allocations: 1742)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 12ms (ActiveRecord: 1.0ms | Allocations: 527)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.0ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 17]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.6ms | Allocations: 201)
+  [1m[36mActiveStorage::Attachment Load (1.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 17], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 5.8ms | Allocations: 475)
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 17]]
+  [1m[36mFollowing Load (0.9ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 17]]
+  Rendered layouts/_profile.html.erb (Duration: 8.2ms | Allocations: 638)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.3ms | Allocations: 320)
+  [1m[36mOpinion Load (0.9ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 26.0ms | Allocations: 2092)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.5ms | Allocations: 1742)
+Completed 200 OK in 49ms (Views: 34.1ms | ActiveRecord: 7.2ms | Allocations: 4801)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 10.7ms | Allocations: 1595)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.4ms | Allocations: 1743)
+Completed 200 OK in 32ms (Views: 27.2ms | ActiveRecord: 0.0ms | Allocations: 4386)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:36:24.250882"], ["updated_at", "2020-05-01 21:36:24.250882"]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 23ms (ActiveRecord: 4.5ms | Allocations: 1200)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mFollowing Load (0.9ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 18]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.1ms | Allocations: 201)
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 18], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 5.3ms | Allocations: 468)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 18]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 18]]
+  Rendered layouts/_profile.html.erb (Duration: 7.9ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.2ms | Allocations: 321)
+  [1m[36mOpinion Load (0.9ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 23.4ms | Allocations: 2085)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.9ms | Allocations: 1742)
+Completed 200 OK in 45ms (Views: 30.9ms | ActiveRecord: 6.2ms | Allocations: 4775)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 8.3ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 13.3ms | Allocations: 1742)
+Completed 200 OK in 26ms (Views: 23.9ms | ActiveRecord: 0.0ms | Allocations: 3164)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 7.4ms | Allocations: 1055)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.0ms | Allocations: 1733)
+Completed 200 OK in 37ms (Views: 21.1ms | ActiveRecord: 3.7ms | Allocations: 4319)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 6.0ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.1ms | Allocations: 1742)
+Completed 200 OK in 21ms (Views: 19.2ms | ActiveRecord: 0.0ms | Allocations: 3163)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:36:24 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.6ms | Allocations: 1733)
+Completed 200 OK in 33ms (Views: 17.7ms | ActiveRecord: 4.1ms | Allocations: 4287)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (3.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:40.394694"], ["updated_at", "2020-05-01 21:39:40.394694"]]
+  [1m[35m (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:39:40 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 31.4ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 315.4ms | Allocations: 17538)
+Completed 200 OK in 386ms (Views: 361.5ms | ActiveRecord: 0.0ms | Allocations: 22076)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:39:40 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 14ms (ActiveRecord: 4.4ms | Allocations: 820)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:39:40 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.2ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 19]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 3.3ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (1.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 19], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 22.5ms | Allocations: 2278)
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 19]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 19]]
+  Rendered layouts/_profile.html.erb (Duration: 15.3ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 8.6ms | Allocations: 882)
+  [1m[36mOpinion Load (2.2ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.3ms | Allocations: 3)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 69.4ms | Allocations: 6273)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 14.0ms | Allocations: 1743)
+Completed 200 OK in 165ms (Views: 75.6ms | ActiveRecord: 31.8ms | Allocations: 17290)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.3ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 19]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.3ms | Allocations: 196)
+  [1m[36mActiveStorage::Attachment Load (1.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 19], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 8.7ms | Allocations: 468)
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 19]]
+  [1m[36mFollowing Load (4.1ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 19]]
+  Rendered layouts/_profile.html.erb (Duration: 19.9ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 5.9ms | Allocations: 317)
+  [1m[36mOpinion Load (1.0ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 44.1ms | Allocations: 2076)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 22.4ms | Allocations: 1741)
+Completed 200 OK in 88ms (Views: 65.0ms | ActiveRecord: 11.7ms | Allocations: 4766)
+Started POST "/opinions" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by OpinionsController#create as HTML
+  Parameters: {"opinion"=>{"text"=>"Good Day"}, "commit"=>"Whistle"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mOpinion Create (1.4ms)[0m  [1m[32mINSERT INTO "opinions" ("text", "author_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["text", "Good Day"], ["author_id", 19], ["created_at", "2020-05-01 21:39:41.297792"], ["updated_at", "2020-05-01 21:39:41.297792"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 31ms (ActiveRecord: 3.7ms | Allocations: 1581)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.6ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 19]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.4ms | Allocations: 188)
+  [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 19], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 8.6ms | Allocations: 468)
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 19]]
+  [1m[36mFollowing Load (1.1ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 19]]
+  Rendered layouts/_profile.html.erb (Duration: 16.0ms | Allocations: 636)
+  Rendered opinions/_opinionform.html.erb (Duration: 6.2ms | Allocations: 317)
+  [1m[36mOpinion Load (1.5ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mCACHE ActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 19], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered collection of opinions/_opinion.html.erb [1 times] (Duration: 28.4ms | Allocations: 1918)
+  Rendered opinions/index.html.erb within layouts/application (Duration: 68.7ms | Allocations: 4077)
+Completed 500 Internal Server Error in 90ms (ActiveRecord: 8.6ms | Allocations: 4961)
+  [1m[35m (1.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:41.497792"], ["updated_at", "2020-05-01 21:39:41.497792"]]
+  [1m[35m (1.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 379)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 19.1ms | Allocations: 1743)
+Completed 200 OK in 30ms (Views: 25.4ms | ActiveRecord: 0.0ms | Allocations: 2494)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.0ms | Allocations: 1733)
+Completed 200 OK in 21ms (Views: 16.3ms | ActiveRecord: 1.3ms | Allocations: 2587)
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:41.639733"], ["updated_at", "2020-05-01 21:39:41.639733"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.2ms | Allocations: 1742)
+Completed 200 OK in 18ms (Views: 15.9ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 12.8ms | Allocations: 1733)
+Completed 200 OK in 22ms (Views: 18.0ms | ActiveRecord: 1.1ms | Allocations: 2587)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:41.761302"], ["updated_at", "2020-05-01 21:39:41.761302"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 18.2ms | Allocations: 1742)
+Completed 200 OK in 26ms (Views: 23.8ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.5ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 11.6ms | Allocations: 1733)
+Completed 200 OK in 22ms (Views: 17.5ms | ActiveRecord: 0.8ms | Allocations: 2587)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:41.877984"], ["updated_at", "2020-05-01 21:39:41.877984"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 15.1ms | Allocations: 1742)
+Completed 200 OK in 26ms (Views: 21.9ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 6ms (ActiveRecord: 0.9ms | Allocations: 526)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:39:41 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  [1m[36mFollowing Load (0.9ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 23]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.3ms | Allocations: 200)
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 4.7ms | Allocations: 472)
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 23]]
+  [1m[36mFollowing Load (1.1ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 23]]
+  Rendered layouts/_profile.html.erb (Duration: 7.8ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.0ms | Allocations: 320)
+  [1m[36mOpinion Load (0.9ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 22.7ms | Allocations: 2087)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.4ms | Allocations: 1743)
+Completed 200 OK in 45ms (Views: 30.3ms | ActiveRecord: 6.8ms | Allocations: 4776)
+  [1m[35m (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (4.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 12.2ms | Allocations: 1594)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 14.4ms | Allocations: 1743)
+Completed 200 OK in 35ms (Views: 31.7ms | ActiveRecord: 0.0ms | Allocations: 4379)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:39:42.175475"], ["updated_at", "2020-05-01 21:39:42.175475"]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 19ms (ActiveRecord: 4.2ms | Allocations: 1199)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  [1m[36mFollowing Load (0.8ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 24]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.4ms | Allocations: 201)
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 4.7ms | Allocations: 468)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 24]]
+  [1m[36mFollowing Load (0.7ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 24]]
+  Rendered layouts/_profile.html.erb (Duration: 7.7ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.2ms | Allocations: 321)
+  [1m[36mOpinion Load (0.9ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 22.9ms | Allocations: 2085)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.0ms | Allocations: 1742)
+Completed 200 OK in 43ms (Views: 29.6ms | ActiveRecord: 6.0ms | Allocations: 4774)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 14.4ms | Allocations: 1742)
+Completed 200 OK in 25ms (Views: 22.8ms | ActiveRecord: 0.0ms | Allocations: 3164)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 8.9ms | Allocations: 1055)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.6ms | Allocations: 1733)
+Completed 200 OK in 43ms (Views: 22.6ms | ActiveRecord: 4.1ms | Allocations: 4319)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 9.6ms | Allocations: 1742)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.0ms | Allocations: 3163)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:39:42 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 6.6ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.1ms | Allocations: 1733)
+Completed 200 OK in 34ms (Views: 19.0ms | ActiveRecord: 3.4ms | Allocations: 4287)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:31.909169"], ["updated_at", "2020-05-01 21:43:31.909169"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:43:31 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 36.6ms | Allocations: 2382)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 421.6ms | Allocations: 17613)
+Completed 200 OK in 499ms (Views: 478.4ms | ActiveRecord: 0.0ms | Allocations: 22151)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:43:32 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 18ms (ActiveRecord: 2.7ms | Allocations: 820)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:43:32 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.4ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 25]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 6.2ms | Allocations: 482)
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 33.1ms | Allocations: 2278)
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 25]]
+  [1m[36mFollowing Load (0.7ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 25]]
+  Rendered layouts/_profile.html.erb (Duration: 14.7ms | Allocations: 1148)
+  Rendered opinions/_opinionform.html.erb (Duration: 7.4ms | Allocations: 882)
+  [1m[36mOpinion Load (2.8ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 81.7ms | Allocations: 6273)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 13.3ms | Allocations: 1743)
+Completed 200 OK in 233ms (Views: 90.5ms | ActiveRecord: 43.7ms | Allocations: 17326)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:43:32 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.2ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 25]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 3.7ms | Allocations: 196)
+  [1m[36mActiveStorage::Attachment Load (1.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 13.4ms | Allocations: 468)
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 25]]
+  [1m[36mFollowing Load (1.4ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 25]]
+  Rendered layouts/_profile.html.erb (Duration: 18.0ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.0ms | Allocations: 317)
+  [1m[36mOpinion Load (4.5ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 58.3ms | Allocations: 2076)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 28.3ms | Allocations: 1741)
+Completed 200 OK in 108ms (Views: 82.2ms | ActiveRecord: 11.7ms | Allocations: 4765)
+  [1m[35m (1.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (10.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (5.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:33.248875"], ["updated_at", "2020-05-01 21:43:33.248875"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.1ms | Allocations: 379)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 26.3ms | Allocations: 1743)
+Completed 200 OK in 37ms (Views: 35.0ms | ActiveRecord: 0.0ms | Allocations: 2494)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 7.1ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 27.1ms | Allocations: 1733)
+Completed 200 OK in 45ms (Views: 39.6ms | ActiveRecord: 1.7ms | Allocations: 2587)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:33.451364"], ["updated_at", "2020-05-01 21:43:33.451364"]]
+  [1m[35m (3.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 25.0ms | Allocations: 1742)
+Completed 200 OK in 33ms (Views: 30.6ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 13.1ms | Allocations: 1733)
+Completed 200 OK in 23ms (Views: 18.3ms | ActiveRecord: 1.1ms | Allocations: 2587)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:33.600080"], ["updated_at", "2020-05-01 21:43:33.600080"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 10.8ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 17.9ms | Allocations: 1742)
+Completed 200 OK in 35ms (Views: 32.9ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"bolu", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "bolu"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 17.2ms | Allocations: 1733)
+Completed 200 OK in 34ms (Views: 30.2ms | ActiveRecord: 0.8ms | Allocations: 2587)
+  [1m[35m (1.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mike@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (13.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mike"], ["email", "mike@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:33.763970"], ["updated_at", "2020-05-01 21:43:33.763970"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 10.3ms | Allocations: 372)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 14.4ms | Allocations: 1742)
+Completed 200 OK in 33ms (Views: 30.7ms | ActiveRecord: 0.0ms | Allocations: 2485)
+Started POST "/login" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"username"=>"mike", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mike"], ["LIMIT", 1]]
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 9ms (ActiveRecord: 1.4ms | Allocations: 523)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:43:33 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  [1m[36mFollowing Load (1.3ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 29]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 1.6ms | Allocations: 188)
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 29], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 7.6ms | Allocations: 468)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 29]]
+  [1m[36mFollowing Load (1.0ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 29]]
+  Rendered layouts/_profile.html.erb (Duration: 12.0ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 2.9ms | Allocations: 317)
+  [1m[36mOpinion Load (1.3ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 34.3ms | Allocations: 2068)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 14.5ms | Allocations: 1741)
+Completed 200 OK in 65ms (Views: 47.5ms | ActiveRecord: 7.5ms | Allocations: 4756)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 27.8ms | Allocations: 1589)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 19.8ms | Allocations: 1743)
+Completed 200 OK in 75ms (Views: 68.7ms | ActiveRecord: 0.0ms | Allocations: 4374)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"mikey@gmail.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "mikey@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mike"], ["username", "mikey"], ["email", "mikey@gmail.com"], ["location", "Lagos"], ["created_at", "2020-05-01 21:43:34.189921"], ["updated_at", "2020-05-01 21:43:34.189921"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/opinions
+Completed 302 Found in 32ms (ActiveRecord: 6.2ms | Allocations: 1200)
+Started GET "/opinions" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by OpinionsController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  [1m[36mFollowing Load (0.9ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 30]]
+  Rendering opinions/index.html.erb within layouts/application
+  Rendered layouts/_vertical-nav.html.erb (Duration: 11.0ms | Allocations: 201)
+  [1m[36mActiveStorage::Attachment Load (1.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 30], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  Rendered layouts/_horizontal-nav.html.erb (Duration: 40.1ms | Allocations: 468)
+  [1m[35m (5.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "opinions" WHERE "opinions"."author_id" = $1[0m  [["author_id", 30]]
+  [1m[36mFollowing Load (2.5ms)[0m  [1m[34mSELECT "followings".* FROM "followings" WHERE "followings"."follower_id" = $1[0m  [["follower_id", 30]]
+  Rendered layouts/_profile.html.erb (Duration: 25.1ms | Allocations: 637)
+  Rendered opinions/_opinionform.html.erb (Duration: 7.9ms | Allocations: 321)
+  [1m[36mOpinion Load (1.2ms)[0m  [1m[34mSELECT "opinions".* FROM "opinions" ORDER BY "opinions"."created_at" DESC[0m
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 3)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE 1=1[0m
+  Rendered opinions/index.html.erb within layouts/application (Duration: 104.3ms | Allocations: 2085)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 31.1ms | Allocations: 1742)
+Completed 200 OK in 154ms (Views: 127.2ms | ActiveRecord: 14.7ms | Allocations: 4771)
+  [1m[35m (2.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 15.3ms | Allocations: 1742)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 0.0ms | Allocations: 3164)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"mikey", "email"=>"invalid_email", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (1.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "mikey"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "invalid_email"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1055)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 10.9ms | Allocations: 1733)
+Completed 200 OK in 38ms (Views: 20.5ms | ActiveRecord: 4.2ms | Allocations: 4319)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/signup" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 22.2ms | Allocations: 1025)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 25.8ms | Allocations: 1742)
+Completed 200 OK in 59ms (Views: 53.6ms | ActiveRecord: 0.0ms | Allocations: 3163)
+Started POST "/users" for 127.0.0.1 at 2020-05-01 22:43:34 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Mike", "username"=>"", "email"=>"valid@example.com", "location"=>"Lagos"}, "commit"=>"Sign Up"}
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "valid@example.com"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 8.4ms | Allocations: 1048)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_head.html.erb (Duration: 13.8ms | Allocations: 1733)
+Completed 200 OK in 41ms (Views: 24.5ms | ActiveRecord: 4.1ms | Allocations: 4287)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m

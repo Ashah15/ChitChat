@@ -1,0 +1,21 @@
+<%= render 'layouts/header' %>
+   <div class="main-content-cover-pic"></div>
+    <div class="main-content-body row">
+        <%= render 'layouts/profile' %>
+        <div class="col" id="tweets-col">
+        <%= render "commentform" %>
+        <p class="tweets-titlebar">ChitChat</p>
+        <%= render @comments %>
+        </div>
+        <div class="col followers-col last-col" >
+          <p>Who to follow</p>
+           <% @users.each do|user| %>       
+               <div class="row j-between">
+                 <div class="row s-person">
+                  <%= show_comments(user)%>
+                </div>
+               </div>                
+            <% end %>
+        </div>
+    </div>
+</div>

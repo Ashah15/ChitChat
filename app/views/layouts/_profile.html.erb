@@ -1,0 +1,26 @@
+<div class="col tweet-stats-col">
+            <p><%= current_user_avatar(current_user) %></p>
+            <p class="user-fullname"><%= current_user.name %> <i class="fas fa-check-circle"></i></p>
+            <p class="user-username">@<%= current_user.username %> </p> 
+            
+            <div class="row tweet-stats">
+                <div class="stat-col">
+                    <p class="tweet-stat-title">Chats</p>
+                    <p class="tweet-stat-number"><%= current_user.comments.count %></p>
+                </div>
+                <div class="stat-col">
+                    <p class="tweet-stat-title">Followers</p>
+                    <p class="tweet-stat-number"><%= @current_user.followers.count %></p>
+                </div>
+                <div class="stat-col">
+                    <p class="tweet-stat-title">Following</p>
+                    <p class="tweet-stat-number"><%= @current_user.following.count %></p>
+                </div>
+            </div>
+
+            <div class="row j-between">
+                <%= button_to "Delete Profile",{:action => 'destroy',
+                                            :controller => 'users',:id => current_user.id }, 
+                                            {:method => :delete, :class => "deletebtn"} %>
+            </div> 
+        </div>
