@@ -1,0 +1,27 @@
+<div class="col nav-vertical">
+    <div class="logo-area">
+        <img src="http://gravatar.com/avatar/3b1a49dfd7e18269912a1a4774d4cb44?size=80" alt="logo" id="logo">
+    </div>
+    <nav class="nav-vertical-nav">
+        <ul class="nav-list">
+            <li>
+                <i class="fas fa-home"></i> <%= link_to "Home", root_path %>
+            </li>
+            <li> 
+                <i class="fas fa-street-view"></i> <%= link_to "Profile", current_user %>
+            </li>
+            <li>
+                <i class="fas fa-bell"></i> <%= link_to "Notifications", notifications_path %>
+            </li>
+            <li>
+                <i class="fas fa-bell"></i> <%= link_to "About", about_path %></a>
+            </li>
+            <li>
+                <i class="fas fa-hand-holding"></i> <%= link_to "Help", help_path %>
+            </li>
+            <li>
+                <i class="fas fa-atom"></i><%= link_to "Log out", logout_path, method: :delete %>
+            </li>
+        </ul>
+    </nav>
+</div>

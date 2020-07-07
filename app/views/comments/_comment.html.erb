@@ -1,0 +1,10 @@
+<div class="tweet row">
+  <div class="tweet-post">
+      <% comment_image(comment.image) %>
+      <div class="row j-between"><p class="tweet-post-name"><span class="f-name"><%= comment.author.name %></span> <i class="fas fa-check-circle"></i><span class="u-name">@<%= comment.author.username %></span></p> <p class="tweet-post-timeago"> <i class="far fa-clock"></i><%= time_ago_in_words(comment.created_at) %> ago.</p></div>
+      <p class="tweet-comment"><%= comment.text %></p>
+      <p class="likes-bar"><%= pluralize(comment.likes.count, "like") %></p>
+      <% liked(liked?(comment.id), current_user.id, comment.id) %>
+  </div>
+</div>
+
